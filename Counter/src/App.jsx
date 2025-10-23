@@ -12,6 +12,10 @@
 
   // const changeValue = () => {
   //   console.log("value of counter:", counter)
+  //   setCount(counter + 1)
+  //   setCount(counter + 1)
+  //   setCount(counter + 1)
+  //   setCount(counter + 1)
   //   setCount(counter + 1)   // ✅ Correct way to update state
   // }
 
