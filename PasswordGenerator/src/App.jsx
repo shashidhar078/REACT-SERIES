@@ -23,7 +23,7 @@ function App() {
       }
       for(let i=1;i<=length;i++)
       {
-        let char=Math.floor(Math.random()*str.length+1);
+        let char=Math.floor(Math.random()*str.length);
         pass+=str.charAt(char);
       }
       setPassword(pass);
@@ -56,7 +56,7 @@ function App() {
             max={100}
             value={length}
             className="cursor-pointer"
-            onChange={(e)=>{setLength(e.target.value)}}
+            onChange={(e)=>{setLength(Number(e.target.value))}}
             / >
               <label>Length:{length}</label>
           </div>
