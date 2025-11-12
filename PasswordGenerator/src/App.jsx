@@ -1,36 +1,38 @@
-import React,{ useState,useCallback } from 'react'
+import React,{ useState,useCallback,useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 
 
 function App() {
-  const [length,setLength]=useState(0);
+  const [length,setLength]=useState(8);
   const [numberAllowed,setnumberAllowed]=useState(false);
   const [charAllowed,setcharAllowed]=useState(false);
   const [password,setPassword]=useState("");
 
-  // const passwordGenerator=useCallback(
-  //   () => {
-  //     let pass="";
-  //     let str="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-  //     if(numberAllowed)
-  //     {
-  //       str+="0123456789"
-  //     }
-  //     if(charAllowed)
-  //     {
-  //       str+="!@#$%^&*()_+-=[]{}|;:'\",.<>/?`~";
-  //     }
-  //     for(let i=1;i<=array.length;i++)
-  //     {
-  //       let char=Math.floor(Math.random()*str.length+1);
-  //       pass=str.charAt(char);
-  //     }
-  //     setPassword(pass);
-  //   },
-  //   [fn,length,numberAllowed,charAllowed,setPassword],
-  // )
-  
+  const passwordGenerator=useCallback(
+    () => {
+      let pass="";
+      let str="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+      if(numberAllowed)
+      {
+        str+="0123456789"
+      }
+      if(charAllowed)
+      {
+        str+="!@#$%^&*()_+-=[]{}|;:'\",.<>/?`~";
+      }
+      for(let i=1;i<=length;i++)
+      {
+        let char=Math.floor(Math.random()*str.length+1);
+        pass+=str.charAt(char);
+      }
+      setPassword(pass);
+    },
+    [length,numberAllowed,charAllowed,setPassword],
+  )
+  useEffect(()=>{
+    passwordGenerator()
+  },[passwordGenerator])
   return (
     <>
       <div className="w-full max-w-lg mx-auto shadow-md rounded-lg px-4 py-3 my-5 bg-gray-800 text-orange-500">
@@ -42,6 +44,7 @@ function App() {
           value={password}
           className="outline-none w-full py-1 px-3"
           placeholder="Password"
+          readOnly
         />
         <button className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'>copy</button>
         </div>
@@ -56,6 +59,28 @@ function App() {
             onChange={(e)=>{setLength(e.target.value)}}
             / >
               <label>Length:{length}</label>
+          </div>
+          <div className="flex items-center gap-x-1">
+            <input
+              type="checkbox"
+              defaultChecked={numberAllowed}
+              id="numberInput"
+              onChange={()=>{
+                setnumberAllowed((prev)=>!prev)
+              }}
+            />
+            <label htmlFor="numberInput">Numbers</label>
+          </div>
+           <div className="flex items-center gap-x-1">
+            <input
+              type="checkbox"
+              defaultChecked={charAllowed}
+              id="characterInput"
+              onChange={()=>{
+                setcharAllowed((prev)=>!prev)
+              }}
+            />
+            <label htmlFor="characterInput">Characters</label>
           </div>
         </div>
       </div>
