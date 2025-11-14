@@ -32,7 +32,7 @@ function App() {
   )
   useEffect(()=>{
     passwordGenerator()
-  },[passwordGenerator])
+  },[length,numberAllowed,charAllowed,passwordGenerator])
   return (
     <>
       <div className="w-full max-w-lg mx-auto shadow-md rounded-lg px-4 py-3 my-5 bg-gray-800 text-orange-500">
