@@ -4,7 +4,7 @@ import Home from "./components/Home/Home.jsx";
 import About from "./components/About/About.jsx"
 import Contact from "./components/Contact/Contact.jsx"
 import User from "./components/User/User.jsx"
-import Github from "./components/Github/Github.jsx"
+import Github,{githubFollowers} from "./components/Github/Github.jsx"
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
@@ -40,7 +40,9 @@ const router=createBrowserRouter(
       <Route path="about" element={<About/>}/>
       <Route path="contact" element={<Contact/>}/>
       <Route path="user/:userid" element={<User/>}/>
-      <Route path="github" element={<Github/>}/>
+      <Route 
+      loader={githubFollowers}
+      path="github" element={<Github/>}/>
     </Route>
   )
 )
