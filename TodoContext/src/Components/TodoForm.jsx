@@ -3,7 +3,7 @@ import {useState} from 'react'
 import {useTodo} from "../Contexts/index.js"
 
 function TodoForm() {
-    const [todo,setTodo] = useState();
+    const [todo,setTodo] = useState("");
 
     const {addTodo} = useTodo();
     const add=(e)=>{
@@ -12,6 +12,7 @@ function TodoForm() {
         if(!todo) return;
 
         addTodo({todo,completed:false})
+        setTodo("")
     }
 
     return (
